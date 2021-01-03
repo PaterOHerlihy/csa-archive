@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"  
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<h:outputStylesheet library="css" name="style.css"/>
+<h:outputStylesheet library="css" name="styleMobile.css" media="only screen and (max-width: 720px), only screen and (max-device-width: 720px)"/>
+<h:outputStylesheet library="css" name="formStyle.css"/>
+<h:outputStylesheet library="css" name="formStyleMobile.css" media="only screen and (max-width: 720px), only screen and (max-device-width: 720px)"/>
+<title>Notiz bearbeiten</title>
+</h:head>
+
+
+<h:body>
+	<div id="wrapper">
+		<div id="menue">
+			<img src="img/logo.png" alt="logo"/>
+			<div id="burger" onClick="document.querySelector('#nav').classList.toggle('open_nav'); this.classList.toggle('cross_active');">
+			<!--enthält Nav-Buttons für kleinen Viewport-->
+			</div>
+			<div id="nav">
+				<div class="navpunkt" onClick="document.querySelector('#burger').classList.remove('cross_active'); document.querySelector('#nav').classList.remove('open_nav');">
+					<a  href="notizuebersicht2.xhtml">Übersicht</a>
+				</div>
+				<div class="navpunkt" onClick="document.querySelector('#burger').classList.remove('cross_active'); document.querySelector('#nav').classList.remove('open_nav');">
+					<a href="notiz_anlegen.xhtml">Notiz erstellen</a>
+				</div>
+			</div>
+		</div>
+		
+		<div id="formular">
+				
+				<h1>Notiz: <h:outputText value="#{bnotiz.getNot().getTitel()}"></h:outputText></h1>
+				<h:form>
+	   
+				    <div id="label">
+				        <p>Autor:</p>
+				        <p>Kategorie:</p>
+				        <p>Erstellungsdatum:</p>
+				        <p>Zuletzt bearbeitet:</p>
+				        <p>Inhalt:</p>
+				       
+				    </div> 
+				    
+				    <div id="inputfelder">  
+				        <h:inputText value="#{bnotiz.getNot().getErstellerID().getName()}" readonly="true"></h:inputText>
+				        <h:inputText value="#{bnotiz.getNot().getZugKat().getKatName()}" readonly="true"></h:inputText>
+						<div class="output" style="margin-top: 18px;">
+							<h:outputText value="#{bnotiz.getNot().getCreatedOn().toString()}" ></h:outputText>
+						</div>
+				        <div class="output" style="margin-top: 18px;">
+				        	<h:outputText value="#{bnotiz.getNot().getLastTimeEdited().toString()}"></h:outputText>
+				        </div>
+				        
+				        <h:inputTextarea id="inp" row = "10" col = "10" value="#{bnotiz.preInhalt}"></h:inputTextarea>
+				        
+				        <h:commandButton type="submit" class="button" style="margin:30px 0;" value="Änderung Speichern" action="#{bnotiz.update}" />
+				        
+			<!--        	<h:commandButton value="ÄNDERUNG SPEICHERN" action="#{bnotiz.update()}"> -->
+			<!--        		<f:setPropertyActionListener target="#{bnotiz.inhalt}" value="#{inp.value}" /> -->
+			<!--        	</h:commandButton> -->
+			       	
+			<!-- 	        <h:commandButton value="NOTIZ LÖSCHEN" action="bnotiz.delete()"/>  -->
+					</div> 
+					
+					
+					<div class="clear"></div>
+					<div style="float: left;">
+<!-- 					<h:button value="Zurück" outcome="notizuebersicht2.xhtml"/> -->
+					</div>
+		
+			</h:form>
+		</div>
+	</div>
+	
+	
+	
+	
+</h:body>
+</html>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"  
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<h:outputStylesheet library="css" name="style.css"/>
+<h:outputStylesheet library="css" name="styleMobile.css" media="only screen and (max-width: 720px), only screen and (max-device-width: 720px)"/>
+<h:outputStylesheet library="css" name="formStyle.css"/>
+<h:outputStylesheet library="css" name="formStyleMobile.css" media="only screen and (max-width: 720px), only screen and (max-device-width: 720px)"/>
+<title>Übersicht über die Notizen</title>
+</h:head>
+
+
+<h:body>
+	<div id="wrapper">
+		<div id="menue">
+			<img src="img/logo.png" alt="logo"/>
+			<div id="burger" onClick="document.querySelector('#nav').classList.toggle('open_nav'); this.classList.toggle('cross_active');">
+			<!--enthält Nav-Buttons für kleinen Viewport-->
+			</div>
+			<div id="nav">
+				<div class="navpunkt" onClick="document.querySelector('#burger').classList.remove('cross_active'); document.querySelector('#nav').classList.remove('open_nav');">
+					<a class="active" href="notizuebersicht2.xhtml">Übersicht</a>
+				</div>
+				<div class="navpunkt" onClick="document.querySelector('#burger').classList.remove('cross_active'); document.querySelector('#nav').classList.remove('open_nav');">
+					<a href="notiz_anlegen.xhtml">Notiz erstellen</a>
+				</div>
+			</div>
+		</div>
+		
+		<div id="formular">
+				<h1>Übersicht über die Notizen</h1>
+	
+				<h:form>
+				   
+				    <h:dataTable value="#{lBean.notizlist}" var="ntz"
+				    styleClass="table"
+			   		headerClass="header"
+			   		rowClasses="odd-row,even-row">
+					
+					
+					    <h:column>
+					        <f:facet name="header">Titel</f:facet>
+					        #{ntz.titel}
+					    </h:column>
+					    <h:column class="invisible">
+					        <f:facet name="header">Autor</f:facet>
+					        #{ntz.getErstellerID().getName()}
+					    </h:column>
+					    
+					    <h:column class="invisible">
+					        <f:facet name="header">Kategorie</f:facet>
+					        #{ntz.getZugKat().getKatName()}
+					    </h:column>
+					    
+					    <h:column class="invisible">
+					        <f:facet name="header">Erstellung</f:facet>
+					        #{ntz.getCreatedOn().toString()}
+					    </h:column>
+					    
+					    <h:column class="invisible">
+					        <f:facet name="header">Letzte Bearbeitung</f:facet>
+					        #{ntz.getLastTimeEdited().toString()}
+					    </h:column>
+					    
+					    <h:column>
+					    	<f:facet name="header">Aktion</f:facet>
+					    	<h:commandButton value="Öffnen" action="#{bnotiz.init}" >
+					    		<f:setPropertyActionListener target="#{bnotiz.id}" value="#{ntz.nID}" />
+			<!--     				<f:param name="id" value="#{ntz.nID}"/> -->
+							</h:commandButton>
+							
+			<!-- 				<h:commandButton action="#{user.editAction}" actionListener="#{user.attrListener}"> -->
+			<!--     			<f:attribute name="action" value="delete"/> -->
+			<!-- 		    	</h:commandButton> -->
+					    
+					    
+					    </h:column>
+					    <h:column>
+					    <h:commandButton class="delete" value="Löschen" action="#{lBean.delete(ntz.nID)}"></h:commandButton>
+					    </h:column>
+			
+			    	
+					</h:dataTable>
+					
+					<h:commandButton class="button" value="Notiz erstellen" action="#{notizBean1.init}" >
+					    		<f:setPropertyActionListener target="#{notizBean1.nkId}" value="#{lBean.nkId}" />
+							</h:commandButton>
+					
+				</h:form>
+	
+		</div>
+	</div>
+	
+	
+	
+	
+</h:body>
+</html>

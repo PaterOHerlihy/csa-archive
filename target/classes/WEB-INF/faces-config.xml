@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config version="2.3" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+
+
+
+<managed-bean>
+	<managed-bean-name>notizBean1</managed-bean-name>
+	<managed-bean-class>beans.NotizBean</managed-bean-class>
+	<managed-bean-scope>application</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>nkBean</managed-bean-name>
+	<managed-bean-class>beans.NKBean</managed-bean-class>
+	<managed-bean-scope>application</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>lBean</managed-bean-name>
+	<managed-bean-class>beans.ListBean</managed-bean-class>
+	<managed-bean-scope>application</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+	<managed-bean-name>bnotiz</managed-bean-name>
+	<managed-bean-class>beans.NBBean</managed-bean-class>
+	<managed-bean-scope>application</managed-bean-scope>
+</managed-bean>
+
+
+
+
+<navigation-rule>
+    <from-view-id>/notizuebersicht2.xhtml</from-view-id>
+    <navigation-case>
+        <from-action>#{bnotiz.init(ntz.nID)}</from-action>
+        <to-view-id>/notizbearbeiten.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
+
+
+
+</faces-config>
